@@ -29,13 +29,13 @@ with Main_Frame;
 -- Use clause exposes its Help and Run subprograms
 
 --with Create_Canvas;           use Create_Canvas;
-with Create_Builder;          use Create_Builder;	
+with Create_Calendar;          use Create_Calendar;	
 
 procedure Harness is
    Win : Main_Frame.Main_Window;
 
 begin
-   Gtk.Main.Set_Locale;
+--   Gtk.Main.Set_Locale; -- what happened to Set_Locale in Gtkada 3.8.3?
    Gtk.Main.Init;
 --   Gtk.Rc.Parse ("testgtkrc");
    Main_Frame.Gtk_New (Win);

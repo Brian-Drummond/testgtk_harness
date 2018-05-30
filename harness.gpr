@@ -1,5 +1,5 @@
 with "gtkada";
-with "gtkada_gl";
+
 project Harness is
    for Main use ("harness.adb");
    for Source_Dirs use (".");
@@ -13,6 +13,6 @@ project Harness is
       for Default_Switches ("Ada") use ("-E");
    end Binder;
    package Linker is
-      for Default_Switches ("Ada") use ("-lgtkglada");
+      -- for Default_Switches ("Ada") use ("-lgtkglada");
    end Linker;
 end Harness;

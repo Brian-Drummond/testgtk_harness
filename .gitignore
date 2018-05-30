@@ -2,3 +2,4 @@ testgtk/
 obj/
 create_*.adb
 create_*.ads
+harness

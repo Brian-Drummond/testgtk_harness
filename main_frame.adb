@@ -81,7 +81,6 @@ package body Main_Frame is
       Iter, Last : Gtk_Text_Iter;
       Blue_Tag, Tag  : Gtk_Text_Tag;
       Mark       : Gtk_Text_Mark;
-      pragma Unreferenced (Button);
 
       procedure Show_Text_With_Tag
         (Iter : in out Gtk_Text_Iter; Text : String);
@@ -108,18 +107,22 @@ package body Main_Frame is
    begin
       if Help_Dialog = null then
          Gtk_New (Help_Dialog);
-         Set_Policy (Help_Dialog, Allow_Shrink => True, Allow_Grow => True,
-                     Auto_Shrink => True);
+         -- Set_Policy (Help_Dialog, Allow_Shrink => True, Allow_Grow => True,
+         --            Auto_Shrink => True);
+         -- find a replacement in GtkAda3.8?
          Set_Title (Help_Dialog, "testgtk help");
          Set_Default_Size (Help_Dialog, 640, 450);
 
-         Set_Spacing (Get_Vbox (Help_Dialog), 3);
+         -- eliminate new "Gtk-Message: GtkDialog mapped without a transient parent." warning
+         Set_Transient_For (Help_Dialog, Gtk.Window.Gtk_Window (Get_Toplevel (Button)));
+
+         Set_Spacing (Get_Content_Area (Help_Dialog), 3);
 
          Gtk_New (Label, "Information on this demo");
-         Pack_Start (Get_Vbox (Help_Dialog), Label, False, True, 0);
+         Pack_Start (Get_Content_Area (Help_Dialog), Label, False, True, 0);
 
          Gtk_New (Scrolled);
-         Pack_Start (Get_Vbox (Help_Dialog), Scrolled, True, True, 0);
+         Pack_Start (Get_Content_Area (Help_Dialog), Scrolled, True, True, 0);
          Set_Policy (Scrolled, Policy_Automatic, Policy_Automatic);
 
          Gtk_New (Help_Text);
@@ -134,7 +137,7 @@ package body Main_Frame is
            (Close, "clicked",
             Widget_Handler.To_Marshaller (Destroy_Help'Access),
             Slot_Object => Help_Dialog);
-         Set_Flags (Close, Can_Default);
+         Set_Can_Default(Close, True);
          Grab_Default (Close);
 
          Blue_Tag := Create_Tag (Help_Text, "blue");
@@ -167,7 +170,7 @@ package body Main_Frame is
 
          begin
             Set_Rgb (Blue, 16#0#, 16#0#, 16#FFFF#);
-            Alloc (Get_Default_Colormap, Blue);
+            -- Alloc (Get_Default_Colormap, Blue);
 
             loop
 
@@ -261,7 +264,8 @@ package body Main_Frame is
 
       --  Label
       Style := Copy (Get_Style (Win));
-      Set_Font_Description (Style, From_String ("Helvetica 12"));
+      -- Set_Font_Description (Style, From_String ("Helvetica 12"));
+      -- Another GTKAda3.3 change : but do we need Helvetica?
 
       Gtk_New (Label, "Drawing demonstration");
       Set_Style (Label, Style);
