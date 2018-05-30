@@ -81,6 +81,7 @@ package Common is
    --  stripped.
 
    package ICS renames Interfaces.C.Strings;
+
    Book_Open_Xpm    : ICS.chars_ptr_array :=
      (ICS.New_String ("16 16 4 1"),
       ICS.New_String ("       c None s None"),

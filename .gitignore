@@ -1,2 +1,4 @@
 testgtk/
 obj/
+create_*.adb
+create_*.ads
