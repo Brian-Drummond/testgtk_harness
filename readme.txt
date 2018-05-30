@@ -44,8 +44,9 @@ create_calendar.ads, create_calendar.adb) into this folder,
 and edit its name into the "with/use" clauses in harness.adb.
 
 Some packages may also need the Common package (common.ads,adb) and 
-specific resource files (testgtk.rc, bitmaps etc). The Cairo example 
-package requires the Testcairo_Drawing package.
+specific resource files (testgtk.rc, bitmaps etc). See NOTEs below for 
+exceptions.
+
 
 Build instructions :
 
@@ -63,6 +64,23 @@ TestGTK package.
 CHANGES: 30 May 2018
 	Updated from GTKAda-2.4.14 to GTKAda-3.8.3
 	Brought under git version control
+
+------------------------------------------------------------------------
+
+NOTE regarding the create_cairo example.
+
+The Cairo example package requires the Testcairo_Drawing package, files
+testcairo_drawing.ads and testcairo_drawing.adb.
+
+This provides a number of test procedures, named in create_cairo.ads. 
+Before building this example, you need to select one of these tests.
+
+Replace the line
+   Run(Win.Frame);
+in harness.adb with the desired test, e.g.
+   Run_Rectangles(Win.Frame);
+
+A dialog to select between these tests would be a nice addition.
 
 ------------------------------------------------------------------------
 
