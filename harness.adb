@@ -24,12 +24,13 @@
 with Gtk.Main;
 with Gtk.Rc;
 with Main_Frame;
+with Help_Dialog;
 
 -- substitute any Create_xxx from testgtk here
 -- Use clause exposes its Help and Run subprograms
 
---with Create_Canvas;           use Create_Canvas;
-with Create_Calendar;          use Create_Calendar;	
+with Create_Calendar;         use Create_Calendar;
+--with Create_Cairo;          use Create_Cairo;	
 
 procedure Harness is
    Win : Main_Frame.Main_Window;
@@ -41,7 +42,7 @@ begin
    Main_Frame.Gtk_New (Win);
    Main_Frame.Show_All (Win);
 
-   Main_Frame.Set_Help(Help'access);
+   Help_Dialog.Set_Help(Help'access);
 
    Run(Win.Frame);
    

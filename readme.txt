@@ -59,6 +59,9 @@ gprbuild harness.gpr
 If build fails because of further missing resources, get them from the 
 TestGTK package.
 
+The structure of the "help_dialog" package arises because each Create_xxx 
+package exports a string containing its help message.
+
 ------------------------------------------------------------------------
 
 CHANGES: 30 May 2018
